@@ -37,7 +37,7 @@ def test_init():
     assert path.layers == (1,)
     assert path.datatypes == (2,)
     assert path.tolerance == 1e-3
-    assert path.simple_path == True
+    assert path.simple_path
     assert path.joins == ("round",)
     assert path.ends == ((1, 2),)
     assert path.bend_radius == (0.1,)

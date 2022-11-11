@@ -24,9 +24,10 @@ def prefix_format(value, stdev=None, unit="", fmtstr=None, base=10):
     if fmtstr is None:
         fmtstr = (
             "{value:.3g} {prefix}{unit}"
-            if stdev == None
+            if stdev is None
             else "({value:.3g} ± {stdev:.3g}) {prefix}{unit}"
         )
+
     if stdev is None:
         stdev = 0
     if base == "bin":
@@ -106,11 +107,12 @@ def timing_benchmark():
     print(f"\n\nBest average time out of {sets} sets of {repeats}:\n")
     print_row(
         "Benchmark",
-        "Gdspy " + gdspy.__version__,
-        "Gdstk " + gdstk.__version__,
+        f"Gdspy {gdspy.__version__}",
+        f"Gdstk {gdstk.__version__}",
         "Gain",
         hsep=True,
     )
+
     for name in bench_names:
         gdspy_time = best_avg_time[(name, "gdspy")]
         gdstk_time = best_avg_time[(name, "gdstk")]
@@ -147,11 +149,12 @@ def memory_benchmark():
 
     print_row(
         "Object",
-        "Gdspy " + gdspy.__version__,
-        "Gdstk " + gdstk.__version__,
+        f"Gdspy {gdspy.__version__}",
+        f"Gdstk {gdstk.__version__}",
         "Reduction",
         hsep=True,
     )
+
 
     def mem_test(func):
         start_mem = proc.memory_info()

@@ -33,7 +33,7 @@ def test_init():
     assert path.datatypes == (2,)
     assert path.tolerance == 1e-3
     assert path.max_evals == 10
-    assert path.simple_path == True
+    assert path.simple_path
     assert path.ends == ((1, 2),)
 
     path = gdstk.RobustPath(0j, [2, 2], layer=3, datatype=[4, 5])

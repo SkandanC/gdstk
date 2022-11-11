@@ -15,8 +15,8 @@ def test_inside():
     circle = gdstk.ellipse((0, 0), 0.5, tolerance=1e-3)
 
     points = [(0, 0), (0.2, 0), (-0.1, -0.8), (0.9, 0.7), (-0.4, 0.4)]
-    truth_ring = tuple([0.25 <= p[0] ** 2 + p[1] ** 2 <= 1 for p in points])
-    truth_circle = tuple([p[0] ** 2 + p[1] ** 2 <= 0.25 for p in points])
+    truth_ring = tuple(0.25 <= p[0] ** 2 + p[1] ** 2 <= 1 for p in points)
+    truth_circle = tuple(p[0] ** 2 + p[1] ** 2 <= 0.25 for p in points)
 
     assert ring.contain(*points) == truth_ring
     assert ring.contain_all(*points) == all(truth_ring)
@@ -27,14 +27,17 @@ def test_inside():
     assert circle.contain_any(*points) == any(truth_circle)
 
     assert gdstk.inside(points, [ring, circle]) == tuple(
-        [r or c for r, c in zip(truth_ring, truth_circle)]
+        r or c for r, c in zip(truth_ring, truth_circle)
     )
+
     assert gdstk.all_inside(points, [ring, circle]) == all(
-        [r or c for r, c in zip(truth_ring, truth_circle)]
+        r or c for r, c in zip(truth_ring, truth_circle)
     )
+
     assert gdstk.any_inside(points, [ring, circle]) == any(
-        [r or c for r, c in zip(truth_ring, truth_circle)]
+        r or c for r, c in zip(truth_ring, truth_circle)
     )
+
 
     polys = [gdstk.rectangle((0, 0), (10, 10)), gdstk.rectangle((10, 0), (20, 10))]
     for pts, _any, _all in (
