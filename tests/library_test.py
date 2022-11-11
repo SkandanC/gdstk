@@ -15,7 +15,7 @@ import gdstk
 
 @pytest.fixture
 def tree():
-    c = [gdstk.Cell("tree_" + str(i)) for i in range(8)]
+    c = [gdstk.Cell(f"tree_{str(i)}") for i in range(8)]
     lib = gdstk.Library()
     lib.add(*c)
     c[0].add(gdstk.Reference(c[1]))

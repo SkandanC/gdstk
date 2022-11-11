@@ -184,7 +184,7 @@ def test_flatten(tree):
     polygons = c3.polygons
     assert len(polygons) == 12
     for i in range(12):
-        assert polygons[i].layer == 0 or polygons[i].layer == 1
+        assert polygons[i].layer in [0, 1]
         assert polygons[i].layer == polygons[i].datatype
     assert len(c3.labels) == 12
 

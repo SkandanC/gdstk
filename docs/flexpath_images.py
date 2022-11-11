@@ -52,11 +52,7 @@ def init1_image():
             u0 = (v1[1] * dx - v1[0] * dy) / den
             u1 = (v0[1] * dx - v0[0] * dy) / den
             p = 0.5 * (p0 + v0 * u0 + p1 + v1 * u1)
-        if u0 <= 0 and u1 >= 0:
-            # Inner corner
-            return [p]
-        # Outer corner
-        return [p0, center, p1]
+        return [p] if u0 <= 0 and u1 >= 0 else [p0, center, p1]
 
     def custom_pointy_end(p0, v0, p1, v1):
         p0 = numpy.array(p0)

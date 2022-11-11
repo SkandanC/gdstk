@@ -14,7 +14,7 @@ import gdstk
 def draw(cell, path):
     bb = cell.bounding_box()
     scaling = 300 / (1.1 * (bb[1][0] - bb[0][0]))
-    name = path / (cell.name + ".svg")
+    name = path / f"{cell.name}.svg"
     cell.write_svg(
         name,
         scaling=scaling,

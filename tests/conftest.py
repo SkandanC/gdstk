@@ -51,8 +51,7 @@ def proof_cells():
     # lib = gdstk.read_oas(infile)
     infile = pathlib.Path(__file__).parent / "proof_lib.gds"
     lib = gdstk.read_gds(str(infile))
-    cells = {c.name: c for c in lib.cells}
-    return cells
+    return {c.name: c for c in lib.cells}
 
 
 def make_proof_lib():

@@ -95,10 +95,7 @@ def test_label_bounding_box():
 
 
 def _create_cell_reference(raw=False):
-    if raw:
-        c = gdstk.RawCell("CELL")
-    else:
-        c = gdstk.Cell("CELL")
+    c = gdstk.RawCell("CELL") if raw else gdstk.Cell("CELL")
     return gdstk.Reference(c)
 
 

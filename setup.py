@@ -33,10 +33,11 @@ class build_ext(_build_ext):
                 str(root_dir),
                 "-B",
                 str(build_dir),
-                "-DCMAKE_INSTALL_PREFIX=" + str(install_dir),
-                "-DCMAKE_BUILD_TYPE=" + config,
+                f"-DCMAKE_INSTALL_PREFIX={str(install_dir)}",
+                f"-DCMAKE_BUILD_TYPE={config}",
             ]
         )
+
         if not self.dry_run:
             self.spawn(
                 [
@@ -51,10 +52,11 @@ class build_ext(_build_ext):
             )
 
         pkgconfig = list(install_dir.glob("**/gdstk.pc"))
-        if len(pkgconfig) == 0:
+        if not pkgconfig:
             raise RuntimeError(
-                "File gdstk.pc not found in cmake install tree: {}".format(install_dir)
+                f"File gdstk.pc not found in cmake install tree: {install_dir}"
             )
+
         with open(pkgconfig[0], "r") as pkg:
             for line in pkg:
                 if line.startswith("Cflags:"):
@@ -80,9 +82,7 @@ class build_ext(_build_ext):
         super().run()
 
 
-with open("README.md") as fin:
-    long_description = fin.read()
-
+long_description = pathlib.Path("README.md").read_text()
 setup_requires = ["numpy"]
 if "build_sphinx" in sys.argv:
     setup_requires.extend(["sphinx", "sphinx_rtd_theme", "sphinx-inline-tabs"])
@@ -100,8 +100,7 @@ version = None
 version_re = re.compile('#define GDSTK_VERSION "(.*)"')
 with open("src/gdstk.h") as fin:
     for line in fin:
-        m = version_re.match(line)
-        if m:
+        if m := version_re.match(line):
             version = m[1]
             break
 if version is None:
